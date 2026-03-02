@@ -1,1 +1,65 @@
-placeholder
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Kanban v1.2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <h1>Board v1.2</h1>
+      <div class="topbar-actions">
+        <button id="addCardBtn" type="button">Add Card</button>
+        <button id="exportBtn" type="button">Export JSON</button>
+        <button id="importBtn" type="button">Import JSON</button>
+        <input id="importInput" type="file" accept="application/json" hidden />
+      </div>
+    </header>
+
+    <main class="board-shell">
+      <button id="prevColBtn" class="nav-btn" type="button" aria-label="Previous column">&#8592;</button>
+      <section id="boardViewport" class="board-viewport" aria-live="polite">
+        <div id="columnsTrack" class="columns-track"></div>
+      </section>
+      <button id="nextColBtn" class="nav-btn" type="button" aria-label="Next column">&#8594;</button>
+    </main>
+
+    <footer class="statusbar">
+      <span id="columnLabel"></span>
+      <span>Swipe left/right to switch columns</span>
+    </footer>
+  </div>
+
+  <dialog id="cardModal" class="modal">
+    <form id="cardForm" class="modal-card" method="dialog">
+      <div class="modal-head">
+        <h2 id="modalTitle">Card</h2>
+        <button id="closeModalBtn" type="button" class="ghost-btn">Close</button>
+      </div>
+
+      <div id="cardEditor" class="editor-grid"></div>
+
+      <div class="modal-actions">
+        <button id="deleteCardBtn" type="button" class="danger">Delete</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="cardTemplate">
+    <article class="card-row" role="button" tabindex="0">
+      <span class="domain-strip"></span>
+      <div class="card-main">
+        <h3 class="card-title"></h3>
+      </div>
+      <span class="energy-dot"></span>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>

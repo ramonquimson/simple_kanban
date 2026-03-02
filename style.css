@@ -1,1 +1,294 @@
+:root {
+  --bg-a: #f5f7f2;
+  --bg-b: #e8efe4;
+  --ink: #0f1b1c;
+  --muted: #4f5f5f;
+  --panel: rgba(255, 255, 255, 0.75);
+  --line: rgba(15, 27, 28, 0.14);
+  --accent: #0e7c66;
+  --warn: #b7483c;
+}
 
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--ink);
+  font-family: "Space Grotesk", sans-serif;
+  background:
+    radial-gradient(1200px 700px at 8% 2%, #ffffffcc, transparent 62%),
+    radial-gradient(900px 600px at 98% 80%, #d6eadf, transparent 60%),
+    linear-gradient(155deg, var(--bg-a), var(--bg-b));
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.topbar,
+.statusbar {
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.topbar {
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.topbar-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+button {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(8px);
+  border-radius: 10px;
+  padding: 0.4rem 0.65rem;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #0f1b1c66;
+}
+
+.board-shell {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: stretch;
+  min-height: 0;
+}
+
+.nav-btn {
+  margin: 0.8rem 0.3rem;
+  width: 2.1rem;
+}
+
+.board-viewport {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.columns-track {
+  display: flex;
+  height: 100%;
+  transition: transform 220ms ease;
+}
+
+.column {
+  min-width: 100%;
+  padding: 0.7rem;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  gap: 0.55rem;
+}
+
+.column-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.column h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.column .limit {
+  color: var(--muted);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+}
+
+.card-list {
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  overflow: auto;
+  padding-right: 0.25rem;
+}
+
+.card-row {
+  display: grid;
+  grid-template-columns: 6px 1fr 10px;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  border-radius: 14px;
+  padding: 0.52rem;
+  cursor: pointer;
+}
+
+.card-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.domain-strip {
+  width: 6px;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 0.94rem;
+  font-weight: 500;
+}
+
+.energy-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+}
+
+.empty-state {
+  color: var(--muted);
+  font-size: 0.88rem;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  padding: 0.55rem;
+}
+
+.statusbar {
+  border-top: 1px solid var(--line);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.modal {
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  width: min(720px, 94vw);
+  background: #f7faf6;
+}
+
+.modal::backdrop {
+  background: #03130f88;
+}
+
+.modal-card {
+  margin: 0;
+  padding: 0.85rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-head h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.editor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.42rem;
+  background: #ffffff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 68px;
+}
+
+.inline-actions {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.ghost-btn {
+  background: transparent;
+}
+
+.danger {
+  border-color: #a11f14aa;
+  color: #8a1f16;
+}
+
+.history {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.77rem;
+  background: #eaf2eb;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.42rem;
+  max-height: 150px;
+  overflow: auto;
+}
+
+@media (max-width: 767px) {
+  .topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .topbar-actions {
+    justify-content: space-between;
+  }
+
+  .statusbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .editor-grid {
+    grid-template-columns: 1fr;
+  }
+}
